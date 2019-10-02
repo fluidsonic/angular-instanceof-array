@@ -7,7 +7,11 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "compile:server": "webpack --config webpack.server.config.js --progress --colors",
+    "serve:ssr": "node serve-ssr-vm",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
+    "build:client-and-server-bundles": "ng build --prod && ng run angular-instanceof-array:server:production --bundleDependencies all"
   },
   "private": true,
   "dependencies": {
@@ -18,10 +22,14 @@
     "@angular/forms": "~8.2.8",
     "@angular/platform-browser": "~8.2.8",
     "@angular/platform-browser-dynamic": "~8.2.8",
+    "@angular/platform-server": "~8.2.8",
     "@angular/router": "~8.2.8",
+    "@nguniversal/common": "^8.1.1",
+    "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "@dollarshaveclub/cloudworker": "^0.1.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.6",
@@ -40,8 +48,10 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
     "protractor": "~5.4.0",
+    "ts-loader": "^5.2.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "webpack-cli": "^3.1.0"
   }
 }
